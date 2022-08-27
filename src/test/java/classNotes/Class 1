@@ -14,10 +14,9 @@ Storage on the internet (on remote server) - GitHub
 4.Architecture of Git:
 Stage architecture --> Working Directory; Staging area, Repository
 
-Working Directory -->
+Working Directory --> current project
 
 5.Where should you create your local repository?
-
 Ideally you should create your repo inside your working directory (your project)
 
 
@@ -34,8 +33,17 @@ Ideally you should create your repo inside your working directory (your project)
  - --> tracked are green, untracked are red
  - git add . - add all untracked files to the staging area
  - git add 'fileName' - add a specific file to the staging area
- - "git rm --cached <file>..." to unstage files
-
+ - git rm --cached <fileName>... to unstage files
+   (delete only from staging area, not from working directory or local repo)
+ - git rm --cached <folderName> -r  - to unstage a folder
+ - git ls-files - to view files in the staging area
+ - git log - show all commits (with the name, author, date)
+ - clear - delete all lines from terminal - stays in same location
+ - git restore . - restores files deleted from the working directory (restores the last copy from staging area to WD)
+ - git diff - shows the difference between files in staging area and WD
+  (shows all the modified/deleted lines in all the different files)
+ - git diff --staged  -> shows the difference between the files in Staging area and in repo
+ (press Q after this to reset Terminal for next command )
 
 
 * Project --> right click --> Open in --> Terminal
@@ -56,8 +64,18 @@ Tracking a new project using git:
 make additional changes and only then commit them
 (Note - in this case, those changes will override the tracked files in staging area)
 
-4. git commit -m 'name that is related to the code we're working on'
---> the files we committed are moved from the staging area to the local repo
+4. git commit -m "name that is related to the code we're working on"
+--> the files we committed are copied from the staging area to the local repo
 -- they contain a name, date, author, and the code
 
-** at this point, git status command will show 'Nothing to commit' --> no files changed, no files in the staging area
+** at this point, git status command will show 'On branch master nothing to commit, working tree clean'
+--> no files changed, no files in the staging area
+-- > all three stages are synchronized
+
+
+        The gitignore file
+ -System specific files should not be include in our repository, so we should ignore them
+ - git ignore -> specifies intentionally untracked files that Git should ignore. Files already tracked by Git are
+  not affected
+  1. create .gitingnore file --> touch .gitignore command
+  2. add the name of the file (and extension) to the .gitignore file
