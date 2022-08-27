@@ -1,0 +1,48 @@
+                                Git & GitHub
+
+Review
+
+1.What is Git?
+It is a version control tool
+
+2.What is a local repository?
+A storage on our local machine
+
+3.What is a remote repository?
+Storage on the internet (on remote server) - GitHub
+
+4.Architecture of Git:
+Stage architecture --> Working Directory; Staging area, Repository
+
+Working Directory -->
+
+5.Where should you create your local repository?
+
+Ideally you should create your repo inside your working directory (your project)
+
+
+* One repository is required for each project
+
+
+        -- Git commands --
+
+ - pwd - shows current location
+ - ls - shows directories within the current location
+ - cd 'directory name' - navigate to a specific directory
+ - git init - initializes an empty local repository
+ - git status - shows the status of all files (whether they are tracked to be committed or not)
+ - --> tracked are green, untracked are red
+ - git add . - add all untracked files
+
+
+* Project --> right click --> Open in --> Terminal
+* Click on Terminal in the bottom left of console
+* Navigate to Project in Finder --> right click --> New Terminal at Folder
+
+
+Tracking a new project using git:
+
+1. Determine what is the location where a repository should be created and navigate to that directory in terminal
+2. git init --> to initialize an empty local repository
+
+* to delete a local repo, delete a hidden .git folder in the project folder (command+shift+. to show hidden files)
