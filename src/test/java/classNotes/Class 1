@@ -30,9 +30,12 @@ Ideally you should create your repo inside your working directory (your project)
  - ls - shows directories within the current location
  - cd 'directory name' - navigate to a specific directory
  - git init - initializes an empty local repository
- - git status - shows the status of all files (whether they are tracked to be committed or not)
+ - git status - shows the status of all files (whether they are tracked (moved to staging area) to be committed or not)
  - --> tracked are green, untracked are red
- - git add . - add all untracked files
+ - git add . - add all untracked files to the staging area
+ - git add 'fileName' - add a specific file to the staging area
+ - "git rm --cached <file>..." to unstage files
+
 
 
 * Project --> right click --> Open in --> Terminal
@@ -43,6 +46,18 @@ Ideally you should create your repo inside your working directory (your project)
 Tracking a new project using git:
 
 1. Determine what is the location where a repository should be created and navigate to that directory in terminal
+
 2. git init --> to initialize an empty local repository
 
 * to delete a local repo, delete a hidden .git folder in the project folder (command+shift+. to show hidden files)
+
+3. git add . --> add all files to the Staging area to track them to be committed
+** we don't have to commit all the changes into the repository right away. We can keep them in staging area,
+make additional changes and only then commit them
+(Note - in this case, those changes will override the tracked files in staging area)
+
+4. git commit -m 'name that is related to the code we're working on'
+--> the files we committed are moved from the staging area to the local repo
+-- they contain a name, date, author, and the code
+
+** at this point, git status command will show 'Nothing to commit' --> no files changed, no files in the staging area
