@@ -73,9 +73,44 @@ make additional changes and only then commit them
 -- > all three stages are synchronized
 
 
-        The gitignore file
+         * The gitignore file *
  -System specific files should not be include in our repository, so we should ignore them
  - git ignore -> specifies intentionally untracked files that Git should ignore. Files already tracked by Git are
   not affected
   1. create .gitingnore file --> touch .gitignore command
   2. add the name of the file (and extension) to the .gitignore file
+  * to ignore a whole folder type nameOfTheFolder/
+
+
+    * To connect the local and remote repository *
+
+    1. Create a remote repository in Github
+
+    2. Establish a connection between local and remote using command:
+        git remote add origin https://github.com/nyenskans/git-project.git
+
+    3. Check if conection has been established:
+        git remote -v --> (the output should match the url we passed if the connection was successfully established)
+     * To delete the connection - git remote remove origin
+     * To check if it has been deleted - git remote -v
+
+     4. To name the branch :
+        git branch -M main
+
+     5. To push the local repository to remote:
+        first time: git push -u main
+        after first time: git push
+
+        * All commits from the local repository will be copied to the remote one
+        ** In github : browse repository at this point in history
+
+
+
+        Git cloning
+
+     Two methods to get code from GItHub:
+     1. download code as zip file
+     - it only contains the latest commit, not the entire history;
+     - we cannot push to that repo afterwards, because the commit history does not match
+     2.
+  Git clone helps us get the code from the remote repositories on our computer

@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5eebfed4-1daf-4a8d-86bd-e85d147e62b4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/class01/GitBasics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/class01/GitBasics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/classNotes/Class 1" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/classNotes/Class 1" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
