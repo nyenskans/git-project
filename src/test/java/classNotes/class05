@@ -1,0 +1,180 @@
+
+
+We can only make commits into a remote repo that has the same commit history as the local repo
+Meaning, if the code was simply copied from the remote repo (which contains multiple commits), we will not be able to
+make additional commits into it
+For that reason, we use git clone
+
+In terminal, we navigate to the folder we want to save the project in, and pass the command
+git clone 'URL' (URL of the remote repository)
+Afterwards, we can work on this repository and make commits in the same remote repo.
+
+When we clone the repo, we have the latest commit once we open it in Intellij (in our case the third commit)
+When we run git log, we get the message 'HEAD -> main, origin/main, origin Head' in front of that commit ^
+- It represents the current commit we have in our working directory (pointing to the current version - commit)
+
+- When we make another commit and run git log, this time, the message HEAD-> main is pointing to the latest commit,
+ while origin/main, origin/HEAD is still pointing to the original commit from remote repo
+
+- Meaning the local and remote repo have been synchronized up to that point (of origin/main, origin/HEAD),
+ while HEAD->main is not on the remote repo yet
+- To synchronize them, first we should check if the local and remote repo are connected (git remote -v)
+-> They are which means once we clone, the remote repo is downloaded and the connection is automatically established
+- Next, to synchronize them, we should just do git push
+
+- We cannot push into a remote repo without authorization
+
+- Once we have cloned the remote repo, and it got updated by the author, we can check for updates by running
+ git fetch command --> it will show us all the updates on the remote repo that needs to be updated in the local repo
+
+ * if there are no updates, the output of git fetch will be empty
+ - git pull command -> downloads all the updates from the remote repo into the local repo
+
+* If we make any changes in our local repo (but not pushing them), and run a pull request to get the updates, we will get
+  a message "Your changes in the local file will be overridden by merge, aborting the pull, please decide what to do
+  with your local changes". We can run git diff to see what we edited (then, we can solve this by manually removing
+  the changes and running git pull again or overwrite the changes)
+
+* If there are multiple people working on the same project, and simultaneously making changes on it (One person makes one
+  commit, the other person makes a different). Neither of them will be able to pull or commit because of different history
+  There is a whole protocol of working on the same project in a group.
+  That is the protocol of branches which solves these issues.
+
+  Git is very vigilant of commit history and things done in the local, so that there wouldn't be a loss of data;
+  there are methodologies that need to be followed for working in group.
+
+  Methodology of branches has to be followed when we work as a group on a single project.
+
+
+                            Branches
+
+
+  Example - 1 github repo, 2 user working on it.
+  We have 1 commit (c1) in that project, on Main branch
+  Both users should clone the repository, and they will both see the first commit from Main branch.
+  User1 needs to add changes to the project, but he shouldn't do so on Main branch, he should create his own branch
+  (myBranch1) from Main, and it is going to be made with the code from first commit(c1). Once he makes changes, he will
+  have to commit his code to his branch (myBranch1) and call the commit c2
+  User2 is also working on commit c1 from Main branch, he needs to branch from Main - creating myBranch2, has to commit
+  his code to his branch.
+  When they are done with creating changes, they need to push their code to GitHub but also not on Main branch.
+  They need to create their own branches on the remote repo as well and push their commits on their own branches.
+
+  As they are working on, there is no difference in histories of commits in the 2 local and 1 remote repository.
+
+  The remote repo is divided into branches. Each local repo is a branch.
+
+  Once the separate branches are completed, they will be sent (merged) to the main branch.
+  ** The main branch is the most important in the remote repo, the code in the Main branch is the one that is currently
+  in deployment. We should never edit and update the code in Main branch directly. It should always be done in separate
+  branches and once it is tested it should be merged into the Main.
+
+
+Group Project:
+
+To develop the solar system
+Requirements:
+Hire one person and immediately get the basic structure of solar system ready and deploy it
+Steps:
+1. Create a project
+2. Write the code
+3. Create local repo
+    git init
+4. Commit the code to the local repo (tested and ready)
+    git add .
+    git commit -m "message"
+5. Create a remote repo
+6. Push the code to remote repo :
+    git remote add origin url
+    git branch -M main
+    (to the main branch because this is the initial code which we are deploying)
+    git push -u origin main (because it's the first time)
+
+
+New requirements:
+Hire a new person and immediately start working on feature SUN of the solar system and deploy it after testing
+  * Make a folder for the project
+
+1. clone the project
+    git clone https://github.com/nyenskans/solar-system-project.git
+    * git branch command gives us the name of the current branch (* main)
+     make sure not to make any changes to the code we cloned
+
+2. create a new branch from Main
+    git branch FeatureSun (any name for the branch)
+    now switch to that branch by using command:
+    git checkout FeatureSun
+
+3. develop the feature Sun in the new branch
+    in this branch we have the code from 1st commit in Main branch
+    we have no commits in FeatureSun branch
+
+4. commit to local repo
+git commit -m "Feature SUN added but with Errors"
+5. create a new remote branch in remote repo and push code
+    git push -u origin FeatureSun - the first time (this creates a new branch in github)
+
+6. Whoever is in charge should test the code and merge it into Main branch
+
+
+**** The new employee is having issues and needs another employee to help with this code.
+The helper should clone the repo, switch to the FeatureSun branch and then create a new branch to work on the code from
+new employee
+**** Or if there are some errors in the current code and the  new employee is fixing them himself, he should create
+an Issue branch and work on them in there (starting point will be FeatureSun code)
+
+** Never switch a branch without making a commit of all changes
+** Git will try to stop you but it might not happen and we will make a switch before saving the changes
+** if we are working on our own issue we don't have to create this branch on github and push
+but if we're working on someone else's then we should
+
+New requirements: feature sun has issues we want to resolve:
+1. create a new issue branch
+    IssueFeatureSun
+2. resolve the error
+3. merge it to feature sun
+     - Switch to the parent branch
+     - use command "git merge childBranch"
+
+**** We can only merge back to the branch we branched out
+** Even after merging, the child branch will still be there, and it will still have its commits, so we need to delete
+it manually if we don't need it anymore
+** the we merge FeatureSun with main
+
+
+** After merge we just use git push to push all the merged code into the remote repo
+** Now main branch will have commits 1, 2, 3, 4
+
+
+Merge Strategies:
+    1. Fast forward
+    2. Recursive Merge
+
+**Before merge, check if the last commit of parent branch is still the same as when the child branch was made
+    if true  -->  Fast Forward merge (we just put c2 in front of c1)
+                instead of overriding the last file (the changes), it will just place it in front of last commit
+    if false --> show conflicted files and choose which one to keep or keep both, it is up to us. The combined code
+    needs to be committed
+
+
+
+
+------------------------------Home Work--------------
+Task1:
+1. Create a simple java project
+2. Have a code in it that prints odd numbers from 1 to 100
+3. create a local repository commit the code in your local repo
+4. push the code to github in the main branch
+Task2:
+1. Clone the project that you created
+2. create a new branch out of main
+3. Modify the code for odd numbers to print even numbers from 1 to 100
+4. commit the code in the created branch
+5. Push your created branch to github
+After task1 task2--> 2 branches on gihtub ,
+in main u will hv code for odd numbers
+in "created branch" code for even numbers
+Task3:
+Merge your main with the created branch
+update the github with your merged main branch
+also mention the merge strategy that will be followed
